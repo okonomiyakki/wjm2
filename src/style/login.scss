@@ -1,0 +1,41 @@
+.login {
+    height: calc(var(--vh, 1vh) * 100);
+    position: relative;
+}
+.login>nav {
+    position:fixed;
+    width: 100%;
+}
+.login_b {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-bottom: 150px;
+}
+.login_b>form>div, .login_b>form>button {
+    width: 300px;
+    //margin-bottom: 100px;
+}
+.login_b>form>button {
+    background-color: rgb(251, 180, 90);
+    border: 1px solid rgb(251, 180, 90);
+
+}
+
+.login_b>form>button {
+    box-shadow: none;
+}
+.login_b>form>button:hover, .login_b>form>button:focus, .login_b>form>button:active {
+    //border: 5px rgb(251, 180, 90);
+    border: 1px solid #FBEFDA;//rgb(251, 180, 90);
+    background-color: #FBEFDA;
+    color: rgb(63, 63, 63);//#737373;
+    box-shadow: none !important;
+}
+.login_b>form>div>input:focus {
+    border-color: #FBEFDA;
+    box-shadow: 0 0 0 .25rem #FFEBD7;
+}

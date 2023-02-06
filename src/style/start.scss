@@ -1,0 +1,412 @@
+.plus {
+    background-color: white !important;
+}
+
+.start_b {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-bottom: 10px;
+    padding-top: 40px;
+}
+
+.start_bd {
+    margin-top: 10px !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.start_b>div>div>div>div>button {
+    //.addbtn
+    margin: 5px auto;
+    padding: 0 5px;
+}
+
+.start_b>div>div>div>div>div>div {
+    //.출발지 추가 목록
+    margin: 10px auto;
+}
+
+.start_b>form {
+    width: 300px;
+    display: flex
+}
+
+.addbtn {
+    height: 36px;
+    width: 250px;
+    font-size: large;
+    margin: 5px auto; //**
+    padding: 0 5px; //**
+}
+
+.addbtn {
+    background-color: rgb(251, 180, 90);
+    border: 1px solid rgb(251, 180, 90);
+    border-radius: 15px;
+    height: 38px;
+    box-shadow: none;
+    color: white;
+}
+
+#addbtn2 {
+    background-color: rgb(233, 124, 56);
+}
+
+
+// .addbtn:focus,
+// .addbtn:active,
+.addbtn:hover {
+    background-color: rgb(251, 180, 90);
+    border: 1px solid rgb(251, 180, 90);
+    border-radius: 15px;
+    // box-shadow: none !important;
+    color: white;
+    box-shadow: 0 0 2px .07rem #616161; //rgb(251, 180, 90);
+}
+
+.start_b>form>div>input {
+    border-right: none;
+    border-radius: 15px 0 0 15px;
+    width: 255px;
+
+}
+
+.start_b>form>div>input:active,
+.start_b>form>div>input:focus,
+.start_b>form>div>input {
+    border-color: #ced4da;
+    ;
+    box-shadow: none !important;
+}
+
+.start_b>form>button {
+    background-color: white;
+    border: 1px solid #ced4da;
+    border-left: none;
+    height: 38px;
+    border-radius: 0 15px 15px 0;
+}
+
+.start_b>form>button:active,
+.start_b>form>button:active:focus,
+.start_b>form>button:hover,
+.start_b>form>button:focus {
+    background-color: white;
+    border: 1px solid #ced4da;
+    border-left: none;
+    box-shadow: none !important;
+}
+
+.submitAddress {
+    text-align: center;
+    padding: 9px !important;
+    border: 1px solid rgb(251, 180, 90);
+    border-radius: 15px;
+    margin: 10px auto;
+    width: 250px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.deleteBtn {
+    background-color: transparent;
+    border: none;
+    padding-left: 7px !important;
+    padding-right: 7px !important;
+    color: rgb(255, 160, 36);
+    font-weight: 600;
+}
+
+.deleteBtn:hover {
+    box-shadow: 0 0 2px .07rem rgb(251, 180, 90);
+}
+
+.searchBtn {
+    background-color: #fff2dd;
+    width: 40px;
+    padding: 15px;
+    margin: 20px;
+    border-radius: 15px;
+    border: 1px solid #fff2dd;
+}
+
+.searchBtn:hover {
+    box-shadow: 0 0 2px .07rem rgb(251, 180, 90);
+    // margin: 10px auto;
+    width: 40px;
+}
+
+#form_2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+
+//ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ추천역
+
+
+.map_wrap,
+.map_wrap * {
+    margin: 0;
+    padding: 0;
+    font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
+    font-size: 12px;
+}
+
+.map_wrap a,
+.map_wrap a:hover,
+.map_wrap a:active {
+    color: #000;
+    text-decoration: none;
+}
+
+.map_wrap {
+    position: relative;
+    width: 100%;
+    height: 800px //530px
+}
+
+#sta_wrap {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 260px;
+    // height: 140px; //510이 최대 165
+    max-height: 400px;
+    margin: 10px 0 30px 10px;
+    padding: 5px;
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.7);
+    z-index: 1;
+    font-size: 12px;
+    border-radius: 10px;
+
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+#info,
+#new_sta {
+    padding: 10px;
+}
+
+//ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ매장 추가
+
+#store_wrap {
+    position: absolute;
+    right: 10px;
+    // bottom: 0;
+    top: 350px;
+    width: 370px;
+    // height: 140px; //510이 최대 165
+    height: 500px;
+    margin: 10px 0 30px 10px;
+    padding: 5px;
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.7);
+    z-index: 1;
+    font-size: 12px;
+    border-radius: 10px;
+
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+
+//ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ출발지 추가
+
+#menu_wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300px; //150px;
+    max-height: 300px;
+    margin: 10px 0 30px 10px;
+    padding: 5px;
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.7);
+    z-index: 1;
+    font-size: 12px;
+    border-radius: 10px;
+}
+
+
+#menu_wrap hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 2px solid #5F5F5F;
+    margin: 3px 0;
+}
+
+.bg_white {
+    background: #fff;
+}
+
+
+//ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 새로운 검색창
+
+#menu_wrap2 {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    width: 370px;
+    height: 300px; //580px; //510이 최대 165
+    margin: 10px 0 30px 10px;
+    padding: 5px;
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.7);
+    z-index: 1;
+    font-size: 12px;
+    border-radius: 10px;
+}
+
+#menu_wrap2 hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 2px solid #5F5F5F;
+    margin: 3px 0;
+}
+
+#menu_wrap2 .option {
+    text-align: center;
+}
+
+#menu_wrap2 .option p {
+    margin: 10px 0;
+}
+
+#menu_wrap2 .option button {
+    margin-left: 5px;
+}
+
+#placesList li {
+    list-style: none;
+}
+
+#placesList .item {
+    position: relative;
+    border-bottom: 1px solid #888;
+    overflow: hidden;
+    cursor: pointer;
+    min-height: 65px;
+}
+
+#placesList .item span {
+    display: block;
+    margin-top: 4px;
+}
+
+#placesList .item h5,
+#placesList .item .info {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+#placesList .item .info {
+    padding: 10px 10px 10px 10px;
+}
+
+#placesList .info .gray {
+    color: #8a8a8a;
+}
+
+#placesList .info .jibun {
+    padding-left: 26px;
+    background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;
+}
+
+#placesList .info .tel {
+    color: #009900;
+}
+
+#pagination {
+    margin: 10px auto;
+    text-align: center;
+}
+
+#pagination a {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+#pagination .on {
+    font-weight: bold;
+    cursor: default;
+    color: #777;
+}
+
+//ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 지역구 다시선택 버튼
+
+#re_button {
+    position: absolute;
+    top: 0;
+    right: 100px;
+    width: 150px;
+    height: 40px; //510이 최대 165
+    margin: 10px 0 30px 10px;
+    padding: 5px;
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.7);
+    z-index: 1;
+    font-size: 12px;
+    border-radius: 10px;
+
+    display: flex;
+    justify-content: center;
+}
+
+.area {
+    position: absolute;
+    background: #fff;
+    border: 1px solid #888;
+    border-radius: 3px;
+    font-size: 12px;
+    top: -5px;
+    left: 15px;
+    padding: 2px;
+}
+
+//ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 핫플 리스트
+
+
+.hotPlace {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 50px;
+    max-width: 1300px;
+    margin: auto;
+}
+
+.hotPlaceTitle {
+    font-size: 20px;
+    text-align: center;
+    padding: 35px;
+}
+
+.hotPlace1 {
+    text-align: center;
+    padding: 20px;
+    border: solid 1px rgb(255, 160, 36);
+    margin: 15px;
+    border-radius: 20px;
+}
+
+.hpName {
+    font-size: 15px;
+}

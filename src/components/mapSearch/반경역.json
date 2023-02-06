@@ -1,0 +1,59 @@
+{
+    "result": {
+        "count": 4,
+        "station": [
+            {
+                "nonstopStation": 0,
+                "stationClass": 2,
+                "stationName": "까치울",
+                "stationID": 751,
+                "x": 126.81097,
+                "y": 37.506252,
+                "arsID": "751",
+                "type": 7,
+                "laneName": "수도권 7호선",
+                "laneCity": "수도권",
+                "ebid": "751"
+            },
+            {
+                "nonstopStation": 0,
+                "stationClass": 2,
+                "stationName": "까치산",
+                "stationID": 264,
+                "x": 126.84693,
+                "y": 37.531406,
+                "arsID": "234-4",
+                "type": 2,
+                "laneName": "수도권 2호선",
+                "laneCity": "수도권",
+                "ebid": "234-4"
+            },
+            {
+                "nonstopStation": 0,
+                "stationClass": 2,
+                "stationName": "까치산",
+                "stationID": 518,
+                "x": 126.846535,
+                "y": 37.5321,
+                "arsID": "518",
+                "type": 5,
+                "laneName": "수도권 5호선",
+                "laneCity": "수도권",
+                "ebid": "518"
+            },
+            {
+                "nonstopStation": 0,
+                "stationClass": 2,
+                "stationName": "신정네거리",
+                "stationID": 263,
+                "x": 126.85287,
+                "y": 37.520233,
+                "arsID": "234-3",
+                "type": 2,
+                "laneName": "수도권 2호선",
+                "laneCity": "수도권",
+                "ebid": "234-3"
+            }
+        ]
+    }
+}
