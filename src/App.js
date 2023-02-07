@@ -11,6 +11,8 @@ import Map from './pages/map';
 import Start from './pages/start';
 import Setloc from './pages/setloc';
 import Mapcopy from './components/mapSearch/mapcopy';
+import { firestore } from "./firebase";
+
 function App() {
   function setScreenSize() {
     let vh = window.innerHeight * 0.01;
