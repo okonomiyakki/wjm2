@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import ClickAdd from './ClickAdd';
 import searchBtn from '../../images/search.png'
 import Target from '../../images/target.png'
+import firebase from '../../firebase';
 
 const { kakao } = window;
 
@@ -12,6 +13,7 @@ export function LandingPage() {
   let [name, setName] = useState([]);
   let [lat, setLat] = useState([]);
   let [lng, setLng] = useState([]);
+  const db = firebase.firestore()
 
   useEffect(() => {
     let sta_wrap = document.querySelector('#sta_wrap');

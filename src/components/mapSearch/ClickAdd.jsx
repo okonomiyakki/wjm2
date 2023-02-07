@@ -3,6 +3,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import STA from './sta.json';
 import SEOUL from './seoul.json';
+import firebase from '../../firebase';
 
 const { kakao } = window
 
@@ -20,7 +21,7 @@ export function ClickAdd({ searchPlace, lat, lng, name }) {
     let ggg = [];           // 가중치 값
     let avgTime = [];       // 최소 소요시간
     let endStation = [];    // 도착역
-
+    const db = firebase.firestore()
 
     useEffect(() => {
         if (lat != null) {
@@ -654,31 +655,110 @@ export function ClickAdd({ searchPlace, lat, lng, name }) {
             //     })(marker_red, infowindow_red);
             // }
 
-            var store = []
-            axios.get("https://wjm.potados.com/api/restaurants", {
-                params: { area: select }
-            })
-                .then((i) => {
-                    for (let j in i.data) {
-                        store.push(i.data[j])
-                    }
-                    console.log(store);
+            // ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ매장정보 표시 추가하기ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 
-                    let geocoder2 = new kakao.maps.services.Geocoder();
-                    let add = [];
-                    let name2 = [];
-                    for (let i = 0; i < store.length; i++) {
-                        geocoder2.addressSearch(store[i].address, function (result, status) {
+            // var store = []
+            // axios.get("https://wjm.potados.com/api/restaurants", {
+            //     params: { area: select }
+            // })
+            //     .then((i) => {
+            //         for (let j in i.data) {
+            //             store.push(i.data[j])
+            //         }
+            //         console.log(store);
+
+            //         let geocoder2 = new kakao.maps.services.Geocoder();
+            //         let add = [];
+            //         let name2 = [];
+            //         for (let i = 0; i < store.length; i++) {
+            //             geocoder2.addressSearch(store[i].address, function (result, status) {
+
+            //                 if (status === kakao.maps.services.Status.OK) {
+            //                     add.push([result[0].y, result[0].x]);
+            //                     name2.push(store[i].name)
+
+            //                     console.log(result);
+            //                     if (i == store.length - 1) {
+            //                         console.log(add);
+
+            //                         for (let k = 0; k < store.length; k++) {
+            //                             let imageSize_red = new kakao.maps.Size(35, 40);
+            //                             let markerImage_red = new kakao.maps.MarkerImage(imageSrc_red, imageSize_red);
+            //                             var marker_red = new kakao.maps.Marker({
+            //                                 map: map,
+            //                                 position: new kakao.maps.LatLng(add[k][0], add[k][1]),    // << 매장 좌표로 바꾸기
+            //                                 title: name2[k],            // << 매장 이름으로 바꾸기
+            //                                 image: markerImage_red,
+            //                                 clickable: true
+            //                             });
+            //                             var infowindow_red = new kakao.maps.InfoWindow({
+            //                                 content: '<a href="https://map.kakao.com/link/to/' + name2[k] + ',' + add[k][0] + ',' + add[k][1] + '">' +
+            //                                     '            <div style="width:150px;text-align:center;padding:6px 0;">' + name2[k] + '</br>Kakao 지도 길찾기 ></div > ' +    // << 매장 이름으로 바꾸기, 길찾기 링크 추가
+            //                                     '     </a>',
+            //                                 removable: true
+            //                             });
+
+            //                             marker_red.setMap(map);
+
+            //                             (function (marker_red, infowindow_red) {
+            //                                 kakao.maps.event.addListener(marker_red, 'click', function () {
+            //                                     infowindow_red.open(map, marker_red);
+            //                                 });
+            //                             })(marker_red, infowindow_red);
+            //                         }
+            //                     }
+            //                 }
+            //             })
+            //         }
+            //     })
+            //     .catch(() => {
+            //         console.log("실패")
+            //     })
+
+
+            // ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ매장정보 표시 추가하기ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+            let copy = []
+            db.collection('myStore').get().then((docs) => {
+                docs.forEach((doc) => {
+                    if (select == doc.id) {
+                        copy.push([doc.id, doc.data()])
+                    }
+                    console.log(doc.id, doc.data())
+
+                })
+                console.log('추가된 정보 : ', copy)
+                console.log('추가된 지역구 : ', copy[0][0])   // 지역구
+                console.log('추가된 매장 구조체 : ', copy[0][1]) // 매장정보
+
+                for (let key in copy[0][1]) {
+                    console.log(key) // 매장이름
+                    console.log(copy[0][1][key]) // 매장 긍정도
+                }
+
+                let ps = new kakao.maps.services.Places();
+                let add = [];
+                let name2 = [];
+                let cnt = 0;
+                searchPlaces()
+                function searchPlaces() {
+                    for (let key in copy[0][1]) {
+                        ps.keywordSearch(key, function placesSearchCB(data, status) {// 키워드로 장소검색 요청
 
                             if (status === kakao.maps.services.Status.OK) {
-                                add.push([result[0].y, result[0].x]);
-                                name2.push(store[i].name)
+                                // 정상적으로 검색이 완료됐으면 좌표 추출
+                                // places[i].address_name, places[i].y, places[i].x, places[i].place_name
 
-                                console.log(result);
-                                if (i == store.length - 1) {
+                                add.push([data[0].y, data[0].x]);
+                                name2.push(key)
+
+                                // console.log("add : ", add);
+                                // console.log("name2 : ", name2);
+
+                                if (cnt == add.length) {
                                     console.log(add);
 
-                                    for (let k = 0; k < store.length; k++) {
+                                    for (let k = 0; k < add.length; k++) {
                                         let imageSize_red = new kakao.maps.Size(35, 40);
                                         let markerImage_red = new kakao.maps.MarkerImage(imageSrc_red, imageSize_red);
                                         var marker_red = new kakao.maps.Marker({
@@ -704,15 +784,17 @@ export function ClickAdd({ searchPlace, lat, lng, name }) {
                                         })(marker_red, infowindow_red);
                                     }
                                 }
-                            }
-                        })
-                    }
-                })
-                .catch(() => {
-                    console.log("실패")
-                })
 
-            // ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ매장정보 표시 추가하기ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ            
+                            }
+                        });
+                        cnt++;
+                    }
+
+
+                }
+            })
+
+            // ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ매장정보 표시 추가하기ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 
 
             let sta_wrap = document.querySelector('#sta_wrap'),
@@ -766,19 +848,35 @@ export function ClickAdd({ searchPlace, lat, lng, name }) {
     function midAreaHot(midArea) {
         let seoulGu = ['도봉구', '강북구', '노원구', '성북구', '중랑구', '은평구', '서대문구', '종로구', '동대문구', '중구', '성동구', '광진구', '마포구', '용산구', '강서구', '양천구', '영등포구', '구로구', '금천구', '관악구', '동작구', '서초구', '강남구', '송파구', '강동구'];
         if (seoulGu.includes(midArea)) {
-            axios.get("https://wjm.potados.com/api/restaurants", {
-                params: { area: midArea }
-            })
-                .then((i) => {
-                    let copy = []
-                    for (let j in i.data) {
-                        copy.push(i.data[j])
+            // axios.get("https://wjm.potados.com/api/restaurants", {
+            //     params: { area: midArea }
+            // })
+            //     .then((i) => {
+            //         let copy = []
+            //         for (let j in i.data) {
+            //             copy.push(i.data[j])
+            //         }
+            //         setHotPlace(copy)
+            //     })
+            //     .catch(() => {
+            //         console.log("실패")
+            //     })
+
+            db.collection('myStore').get().then((docs) => {
+                let copyPoint = [];
+                docs.forEach((doc) => {
+                    if (midArea == doc.id) {
+                        // copyPoint.push(doc.data())
+                        for (let key in doc.data()) {
+                            let storePoint = { name: '', positivePoint: 0 };
+                            storePoint.name = key;
+                            storePoint.positivePoint = doc.data()[key];
+                            copyPoint.push(storePoint)
+                        }
                     }
-                    setHotPlace(copy)
                 })
-                .catch(() => {
-                    console.log("실패")
-                })
+                setHotPlace(copyPoint)
+            })
         }
     }
 
@@ -826,8 +924,8 @@ export function ClickAdd({ searchPlace, lat, lng, name }) {
                         <div className='hotPlace1' key={i}>
                             {/* onClick={() => { window.location.href = `https://map.kakao.com/link/search/${a.address}` }} */}
                             <a className='hpName'>{a.name}</a>
-                            <br />{a.address}
-                            <br />리뷰 긍정도 : {a.keyword}%
+                            {/* <br />{a.address} */}
+                            <br />리뷰 긍정도 : {a.positivePoint}%
                         </div>
                     ))
                 }
